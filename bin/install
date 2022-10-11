@@ -68,13 +68,13 @@ done
 
 # Check if we have files updated and create the pull request
 updated=
-if test d .git; then
+if test -d .git; then
   updated=$(git status -s)
 fi
 
 if [[ -n "$updated" ]]; then
   git add .
-  git checkout -b codestyle-update
+  git branch -D codestyle-update && git checkout -b "$_"
   git commit -m 'Update PHP codestyle to the latest version'
   git push origin codestyle-update
   gh pr create --title "Update PHP codestyle" --body "Update PHP codestyle to the latest version"
