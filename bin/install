@@ -50,6 +50,9 @@ fi
 # Update files in repository
 cp -r "$SOURCE_DIR/skel/"* .
 
+# Check that required directories exist and create it otherwise
+mkdir -p ./{src,test}
+
 # Check required composer dependencies
 declare -A packages=(
   [phpstan/phpstan]="^1.8"
@@ -64,7 +67,11 @@ for package in "${!packages[@]}"; do
 done
 
 # Check if we have files updated and create the pull request
-updated=$(test -d .git && git status -s || true)
+updated=
+if test d .git; then
+  updated=$(git status -s)
+fi
+
 if [[ -n "$updated" ]]; then
   git add .
   git checkout -b codestyle-update
