@@ -14,30 +14,38 @@ php -m | grep yaml || exit 1
 repo="$1"
 
 if [[ -z "$repo" ]]; then
-  echo "Usage: $0 [repository url]";
+  echo "Usage: $0 [repository url|directory path]";
   exit 1
 fi
 
 # Now clone the passed repo
-mkdir -p repo
-cd repo
-name=$(echo "${repo#*/}" | cut -d. -f1)
-if [[ -d "$name" ]]; then
-  cd "$name"
-  git clean -fdx
-  git fetch
-  git pull origin main
+if [[ "$repo" = git@* ]]; then
+  mkdir -p repo
+  cd repo
+  name=$(echo "${repo#*/}" | cut -d. -f1)
+  if [[ -d "$name" ]]; then
+    cd "$name"
+    git clean -fdx
+    git fetch
+    git pull origin main
+  else
+    git clone "$repo" "$name"
+    cd "$name"
+  fi
+
+  # Check that the destination branch is merged
+  if git ls-remote --exit-code origin codestyle-update; then
+    echo "The target branch is not merged. Please merge it first and rerun the script.";
+    exit 1
+  fi
 else
-  git clone "$repo" "$name"
-  cd "$name"
-fi
+  if [[ ! -d "$repo" ]]; then
+    echo 'The directory to the project '"$repo"' does not exist'
+    exit 1
+  fi
 
-# Check that the destination branch is merged
-if git ls-remote --exit-code origin codestyle-update; then
-  echo "The target branch is not merged. Please merge it first and rerun the script.";
-  exit 1
+  cd "$repo"
 fi
-
 
 # Update files in repository
 cp -r "$SOURCE_DIR/skel/"* .
@@ -56,7 +64,7 @@ for package in "${!packages[@]}"; do
 done
 
 # Check if we have files updated and create the pull request
-updated=$(git status -s)
+updated=$(test -d .git && git status -s)
 if [[ -n "$updated" ]]; then
   git add .
   git checkout -b codestyle-update
