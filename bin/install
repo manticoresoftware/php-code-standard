@@ -59,12 +59,12 @@ declare -A packages=(
 
 for package in "${!packages[@]}"; do
   if ! composer show --self | grep "$package"; then
-    composer require --dev :"${packages[$package]}"
+    composer require --dev "$package":"${packages[$package]}"
   fi
 done
 
 # Check if we have files updated and create the pull request
-updated=$(test -d .git && git status -s)
+updated=$(test -d .git && git status -s || true)
 if [[ -n "$updated" ]]; then
   git add .
   git checkout -b codestyle-update
