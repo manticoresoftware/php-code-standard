@@ -26,9 +26,15 @@ Rules:
 * We should not use space after cast, for example, `(int)$var`
 * We should not use space after not, for example, `!$foo`
 * The maximum cyclomatic complexity is 30
-* We should use early return approach to reduce the nesting
+* We should use an early return approach to reduce the nesting
 * No magic method of direct calls at all
 * No unused arguments in the function signature
-* No dead code import with use statement
+* No dead code import with a use statement
+* No dead catches in trye blocks
+* No unused variables are  allowed
+* No unused methods are allowed
+* You should not use type in variable or any property name that you define
+* `@` is forbidden to use in front of any function calls
+* Use type casting instead of calling functions `strval` or `intval`
+* Prefer short ternary operator `?:` over the old one
 * 
-
