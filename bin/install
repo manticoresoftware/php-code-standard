@@ -19,7 +19,9 @@ if [[ -z "$repo" ]]; then
 fi
 
 # Now clone the passed repo
+is_repo=
 if [[ "$repo" = git@* ]]; then
+  is_repo=1
   mkdir -p repo
   cd repo
   name=$(echo "${repo#*/}" | cut -d. -f1)
@@ -73,7 +75,7 @@ if test -d .git; then
   updated=$(git status -s)
 fi
 
-if [[ -n "$updated" ]]; then
+if [[ -n "$is_repo" && -n "$updated" ]]; then
   git add .
   if git branch -a | grep " ${branch}$"; then
     git branch -D "$branch"
