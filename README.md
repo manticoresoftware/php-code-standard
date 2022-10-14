@@ -41,3 +41,4 @@ Rules:
 * All variables should be named by using `camelCase` starting with a non-capitalized letter
 * All variables should be named in declarative format and without type prefix/suffix
 * Repeated function calls in a cycle when unnecessary is prohibited
+* Variable that contains flag/boolean should start with `is` or `has` a prefix to be more readable and understandable
