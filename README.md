@@ -18,7 +18,6 @@ Rules:
 * Always use the `"` without concatenation operator when we need to interpolate variables
 * Each operator must be surrounded by spaces (for example, `$var = 'val'`)
 * The usage of the `list` function is forbidden; we should use pattern matching instead
-* The usage of `count` is prohibited; we should use `sizeof` because it's more performant
 * The usage of `create_function` is prohibited
 * The usage of `print` is prohibited; we should use `echo` instead
 * There is only one single space before and after an operator
@@ -37,5 +36,8 @@ Rules:
 * You should not use type in variable or any property name that you define
 * `@` is forbidden to use in front of any function calls
 * Use type casting instead of calling functions `strval` or `intval`
-* Prefer short ternary operator `?:` over the old one
-* 
+* Prefer the short ternary operator `?:` over the old one
+* There should be no nested ternary operators on a single statement, only one level of nesting is allowed
+* All variables should be named by using `camelCase` starting with a non-capitalized letter
+* All variables should be named in declarative format and without type prefix/suffix
+* Repeated function calls in a cycle when unnecessary is prohibited
