@@ -43,7 +43,7 @@ Rules:
 * Repeated function calls in a cycle when unnecessary is prohibited
 * Variable that contains flag/boolean should start with `is` or `has` a prefix to be more readable and understandable
 
-## How to install hooks
+## How to install git hooks
 
 You should download and install [pre-commit](https://pre-commit.com/) first. Once it's done you can go to the project dir where you want to activate git hooks and run the command:
 
@@ -52,3 +52,9 @@ pre-commit install
 ```
 
 Please, remember that you should do it all the time once something updates in code style and it was deployed to the project.
+
+## How to update the project's code style
+
+There are two scripts: `bin/install` and `bin/install-all`. The second one uses calls to the first one by following the projects defined in `config/repo.yaml` config with all supported repositories.
+
+You should simply run one of them after changes are made to the linter and style to update it via creating the GitHub pull request.
