@@ -38,7 +38,17 @@ Rules:
 * Use type casting instead of calling functions `strval` or `intval`
 * Prefer the short ternary operator `?:` over the old one
 * There should be no nested ternary operators on a single statement, only one level of nesting is allowed
-* All variables should be named by using `camelCase` starting with a non-capitalized letter
+* All variables should be named by using `camelCase` startingg with a non-capitalized letter
 * All variables should be named in declarative format and without type prefix/suffix
 * Repeated function calls in a cycle when unnecessary is prohibited
 * Variable that contains flag/boolean should start with `is` or `has` a prefix to be more readable and understandable
+
+## How to install hooks
+
+You should download and install [pre-commit](https://pre-commit.com/) first. Once it's done you can go to the project dir where you want to activate git hooks and run the command:
+
+```bash
+pre-commit install
+```
+
+Please, remember that you should do it all the time once something updates in code style and it was deployed to the project.
