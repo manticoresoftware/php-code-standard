@@ -1,2 +1,3 @@
 repositories:
   - git@github.com:manticoresoftware/manticoresearch-backup.git
+  - git@github.com:manticoresoftware/manticoresearch-buddy.git
