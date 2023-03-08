@@ -50,7 +50,7 @@ else
 fi
 
 # Update files in repository
-cp -r "$SOURCE_DIR/skel/"* .
+cp -r "$SOURCE_DIR/skel/." .
 
 # Check that required directories exist and create it otherwise
 mkdir -p ./{src,test}
